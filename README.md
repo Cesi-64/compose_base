@@ -8,3 +8,6 @@ https://www.youtube.com/watch?v=qoMg86QA5P4&t=322s
 ### Egalement Docker ACI et NGROCK
 
 https://www.youtube.com/watch?v=MYfsphEdqyo&list=PLwJWw4Pbl4w-O67l_YFsoL6vucvFZhNE-
+
+# Full DevSecOps Azure
+https://www.youtube.com/watch?v=P7_omGRrZTQ&list=PLwJWw4Pbl4w-wi1IwSsI1_csegadLHg4O
