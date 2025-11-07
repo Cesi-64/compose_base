@@ -1,0 +1,29 @@
+services:
+  truc_bdd:
+    container_name: truc_bdd
+    image: mariadb:latest # ;)
+    volumes:
+      - ./backups/app:/backups # for backup so local volume
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASS}
+    healthcheck:
+      test: ['CMD', '/usr/local/bin/healthcheck.sh', '--innodb_initialized']
+      start_period: 5s
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  trc_app:
+    container_name: trc_app
+    image: ${APP_IMAGE:-[image_name]:latest} # Replace [image_name] with the actual image name - switch image according to your needs
+    ports:
+      - 127.0.0.1:3000:3000 # fix docker to local socket avoid firewall break (not in cloud)
+    environment:
+      DB_HOST: truc_bdd
+      DB_PORT: 3306      
+    depends_on:
+      truc_bdd:
+        condition: service_healthy

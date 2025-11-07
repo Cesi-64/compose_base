@@ -1,0 +1,23 @@
+services:
+  mono_bdd:
+    container_name: mono_bdd
+    image: mariadb:latest #warning latest imbiguity
+    volumes:
+    - ./mysql:/var/lib/mysql # Local volume
+    #- data:/var/lib/mysql # Manage volume
+    ports:
+    - 3306:3306 # Local OK not staging or prod
+    environment:
+      MARIADB_ROOT_PASSWORD: toor # Ouch clear data => .env file better
+      MARIADB_DATABASE: bddname
+      MARIADB_USER: roger
+      MARIADB_PASSWORD: regor
+
+  mono_adminer:
+    container_name: mono_adminer
+    image: adminer
+    ports:
+    - 8080:8080
+
+# volumes:
+#   data:

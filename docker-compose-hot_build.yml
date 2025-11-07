@@ -1,0 +1,35 @@
+
+services:
+  # mono_bdd:
+  #   container_name: mono_bdd
+  #   image: mariadb:latest
+  #   volumes:
+  #   - ./mysql:/var/lib/mysql
+  #   environment:
+  #     MARIADB_ROOT_PASSWORD: toor
+  #     MARIADB_DATABASE: bddname
+  #     MARIADB_USER: roger
+  #     MARIADB_PASSWORD: regor
+  #   healthcheck:
+  #     test: ['CMD', '/usr/local/bin/healthcheck.sh', '--innodb_initialized']
+  #     start_period: 5s
+  #     interval: 10s
+  #     timeout: 10s
+  #     retries: 5
+
+  # mono_adminer:
+  #   container_name: mono_adminer
+  #   image: adminer
+  #   ports:
+  #   - 8080:8080
+
+  mono_backend_build:
+    container_name: mono_backend_build
+    build: ./backend/. # Hot build - build with compose
+    environment:
+      BDD_HOST: mono_bdd
+    ports:
+      - 12000:12000
+    depends_on:
+      mono_bdd:
+        condition: service_healthy
